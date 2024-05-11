@@ -57,7 +57,7 @@ const DatePicker = () => {
           ))}
         </div>
       ) : (
-        <div>No data available</div>
+       ''
       )}
     </div>
   );

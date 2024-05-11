@@ -6,13 +6,12 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../store/api";
+import api, { login } from "../store/api";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../store/constant";
 
 export default function Login({ route, method }) {
    const [submit, setSubmit] = useState();
    const [loading, setLoading] = useState(false);
-
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const [confirmPassword, setConfirmPassword] = useState("");
@@ -35,21 +34,20 @@ export default function Login({ route, method }) {
    const handleSubmit = async (e) => {
       e.preventDefault();
       setLoading(true);
-      e.preventDefault();
-
-      try {
-         const response = await api.post("http://ec2-184-73-109-159.compute-1.amazonaws.com:8000/api/user/login", {
-            username,
-            password,
-         });
-         localStorage.setItem("token", response.data.accessToken);
-         localStorage.setItem("refreshToken", response.data.refreshToken);
-         navigate("/"); // Navigate to the home page on successful login
-         console.log("suc");
-      } catch (error) {
-         // console.error("Login failed:", error);
-         alert("Login failed, please check your credentials and try again.");
-      }
+      login(email, password);
+      // try {
+      //    const response = await api.post("/api/user/login", {
+      //       username,
+      //       password,
+      //    });
+      //    localStorage.setItem("token", response.data.accessToken);
+      //    localStorage.setItem("refreshToken", response.data.refreshToken);
+      //    navigate("/"); // Navigate to the home page on successful login
+      //    console.log("suc");
+      // } catch (error) {
+      //    // console.error("Login failed:", error);
+      //    alert("Login failed, please check your credentials and try again.");
+      // }
    };
    const policy = (
       <p className="text-[1.19563rem] font-[Poppins]">

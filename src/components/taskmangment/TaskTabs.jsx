@@ -5,6 +5,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import List from "./tabs/List";
+import Kanban from "./tabs/Kanban";
 function CustomTabPanel(props) {
    const { children, value, index, ...other } = props;
 
@@ -60,7 +61,7 @@ export default function TaskTabs() {
                </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
-               kanban
+               <Kanban/>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
                <List/>

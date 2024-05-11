@@ -19,68 +19,63 @@ api.interceptors.request.use((config) => {
    return config;
 });
 
+export const login = async (e, p) => {
+   try {
+      const response = await axios
+         .post(
+            "http://ec2-184-73-109-159.compute-1.amazonaws.com:8000/api/user/login/",
 
-
-
-
+            {
+               headers: {
+                  "Access-Control-Allow-Origin": "*",
+                  "Access-Control-Allow-Methods":
+                     "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+               },
+               email: e,
+               password: p,
+            }
+         )
+         .then((response) => {
+            console.log(response);
+         });
+      // localStorage.setItem("token", response.data.accessToken);
+      return response.data.accessToken;
+   } catch (error) {
+      console.error("Error refreshing token:", error);
+      throw new Error("Session expired. Please login again.");
+   }
+};
 
 // Function to refresh access token
 const refreshAccessToken = async () => {
    try {
-     const response = await api.post('/refresh', {
-       refresh_token: localStorage.getItem('refreshToken')
-     });
-     localStorage.setItem('token', response.data.accessToken);
-     return response.data.accessToken;
+      const response = await api.post("/api/login/refresh/", {
+         refresh_token: localStorage.getItem("refreshToken"),
+      });
+      localStorage.setItem("token", response.data.accessToken);
+      return response.data.accessToken;
    } catch (error) {
-     console.error('Error refreshing token:', error);
-     throw new Error('Session expired. Please login again.');
+      console.error("Error refreshing token:", error);
+      throw new Error("Session expired. Please login again.");
    }
- };
- 
- // Request interceptor to handle token expiration
- api.interceptors.response.use(response => response, async (error) => {
-   const originalRequest = error.config;
-   if (error.response.status === 401 && !originalRequest._retry) {
-     originalRequest._retry = true;
-     const newAccessToken = await refreshAccessToken();
-     originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-     return api(originalRequest);
+};
+
+// Request interceptor to handle token expiration
+api.interceptors.response.use(
+   (response) => response,
+   async (error) => {
+      const originalRequest = error.config;
+      console.log(error);
+      if (error.response.status === 401 && !originalRequest._retry) {
+         originalRequest._retry = true;
+         const newAccessToken = await refreshAccessToken();
+         originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+         return api(originalRequest);
+      }
+
+      return Promise.reject(error);
    }
-   return Promise.reject(error);
- });
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+);
 
 // api.interceptors.request.use(
 //   (config) => {

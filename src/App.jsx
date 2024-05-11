@@ -21,6 +21,7 @@ import NotFound from "./components/common/NotFound";
 // import { Task } from "@mui/icons-material";
 import Tasks from "./components/taskmangment/Tasks";
 import Chat from "./components/dashboard/chat/Chat";
+import SubscriptionPlan from "./components/dashboard/setting/SubscriptionPlan";
 
 function Logout() {
    localStorage.clear();
@@ -57,6 +58,7 @@ function App() {
                         element={<ServiceProvider />}
                      />
                      <Route path="/dashboard/setting" element={<Setting />} />
+                     <Route path="/dashboard/subscriptionplan" element={<SubscriptionPlan />} />
                      <Route path="/admin/dashpage" element={<DashPage />} />
                      <Route path="/admin/categories" element={<Catigories />} />
                      <Route path="/admin/service" element={<ServiceName />} />

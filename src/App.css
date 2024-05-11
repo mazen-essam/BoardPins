@@ -1,6 +1,9 @@
 html {
     font-size: 16px; /* Default size */
   }
+  .css-1uvj8b6{
+    min-width: 21% !important;
+}
   
   @media (max-width: 768px) {
     html {

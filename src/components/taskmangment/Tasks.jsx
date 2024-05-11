@@ -6,6 +6,7 @@ import setting from "../../assets/dashboard/SettingS.svg";
 import TaskTabs from "./TaskTabs";
 import DatePicker from "./DatePicker";
 import AddProject from "./AddProject";
+import AllProjects from "./AllProjects";
 export default function Tasks() {
    return (
       <section className="Myboard bg-[#F5F6FA] xl:py-[3.81rem] py-[2.5rem] xl:px-[5.8rem] lg:px-[3.5rem] px-[2rem]">
@@ -43,8 +44,11 @@ export default function Tasks() {
                               <TaskTabs />
                            </div>
                         </div>
-                        <div className="lg:col-span-3 lg:px-10 bg-[#FDFDFD] rounded-3xl lg:p-8 ">
+                        <div className="lg:col-span-3  ">
+                           <div>
                            <AddProject />
+                           <AllProjects/>
+                           </div>
                         </div>
                      </div>
                   </div>

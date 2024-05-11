@@ -9,6 +9,7 @@ import tasks from "../../../assets/dashboard/tasksside.svg";
 import down from "../../../assets/dashboard/download 7.svg";
 import setting from "../../../assets/dashboard/Settingside.svg";
 import board from "../../../assets/dashboard/grid4.svg";
+import sidePlan from "../../../assets/dashboard/SidePlan.svg"
 export default function SideBar() {
    return (
       <div className="col-start-1 col-span-2 hidden xl:block font-[] ">
@@ -83,6 +84,17 @@ export default function SideBar() {
                   </div>
                </Link>
                <h4>ACCOUNT</h4>
+               <Link to="/dashboard/subscriptionplan" className="">
+                  {" "}
+                  <div className="flex mt-3 p-4 items-center">
+                     <div>
+                        <LazyLoadImage src={sidePlan} className="w-6" />
+                     </div>
+                     <p className="ms-5 text-[1rem] leading-[184.523%] font-400 ">
+                     Subscription Plans
+                     </p>
+                  </div>
+               </Link>
                <Link to="/dashboard/setting" className="">
                   {" "}
                   <div className="flex mt-3 p-4 items-center">
